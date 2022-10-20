@@ -1,7 +1,7 @@
 @extends('layouts.fe')
 @section('content')
 <!-- ========================= SECTION MAIN ========================= -->
-<section class="section-main bg padding-y-sm">
+{{-- <section class="section-main bg padding-y-sm">
     <div class="container">
         <div class="card">
             <div class="card-body">
@@ -86,12 +86,12 @@
         </figure>
 
     </div> <!-- container .//  -->
-</section>
+</section> --}}
 <!-- ========================= SECTION MAIN END// ========================= -->
 
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y-sm bg">
+{{-- <section class="section-content padding-y-sm bg">
     <div class="container">
 
         <header class="section-heading heading-line">
@@ -190,11 +190,11 @@
         </div> <!-- card.// -->
 
     </div> <!-- container .//  -->
-</section>
+</section> --}}
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y-sm bg">
+{{-- <section class="section-content padding-y-sm bg">
     <div class="container">
 
         <header class="section-heading heading-line">
@@ -291,11 +291,11 @@
         </div> <!-- card.// -->
 
     </div> <!-- container .//  -->
-</section>
+</section> --}}
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <!-- ========================= SECTION REQUEST ========================= -->
-<section class="section-request bg padding-y-sm">
+{{-- <section class="section-request bg padding-y-sm">
     <div class="container">
         <header class="section-heading heading-line">
             <h4 class="title-section bg text-uppercase">Request for Quotation</h4>
@@ -354,7 +354,7 @@
         </div><!-- row // -->
 
     </div><!-- container // -->
-</section>
+</section> --}}
 <!-- ========================= SECTION REQUEST .END// ========================= -->
 
 <!-- ========================= SECTION ITEMS ========================= -->
@@ -363,149 +363,32 @@
         <header class="section-heading heading-line">
             <h4 class="title-section bg text-uppercase">Recommended items</h4>
         </header>
-
         <div class="row-sm">
+        @foreach ($products as $item)
             <div class="col-md-2">
                 <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+                    <div class="img-wrap"> <img src="fe/images/items/3.jpg"></div>
                     <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Good item name</a></h6>
+                        <h6 class="title "><a href="{{ url('fe/detail') }}/{{ $item->id }}">{{ $item->name }}</a></h6>
 
                         <div class="price-wrap">
-                            <span class="price-new">$1280</span>
-                            <del class="price-old">$1980</del>
-                        </div> <!-- price-wrap.// -->
+                            <span class="price-new">{{ $item->sale_price==0?$item->real_price:$item->sale_price }}</span>
+                            @if($item->sale_price==0)
+                            
+                            @else
+                            <del class="price-old">{{ $item->real_price}}</del>
+                            
+                            @endif
 
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Good item name</a></h6>
-
-                        <div class="price-wrap">
-                            <span class="price-new">$1280</span>
-                            <del class="price-old">$1980</del>
                         </div> <!-- price-wrap.// -->
 
                     </figcaption>
                 </figure> <!-- card // -->
             </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Good item name</a></h6>
 
-                        <div class="price-wrap">
-                            <span class="price-new">$1280</span>
-                            <del class="price-old">$1980</del>
-                        </div> <!-- price-wrap.// -->
 
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">Name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
-            <div class="col-md-2">
-                <figure class="card card-product">
-                    <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-                    <figcaption class="info-wrap">
-                        <h6 class="title "><a href="#">The name of product</a></h6>
-                        <div class="price-wrap">
-                            <span class="price-new">$280</span>
-                        </div> <!-- price-wrap.// -->
-                    </figcaption>
-                </figure> <!-- card // -->
-            </div> <!-- col // -->
+          
+            @endforeach
         </div> <!-- row.// -->
 
 

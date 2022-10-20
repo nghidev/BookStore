@@ -6,35 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
 
-    <title>Bootstrap ecommerce UI KIT - Alibaba example html template </title>
+    <title>Lazapee</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fe/images/logos/Picture1.png')}}">
 
     <!-- jQuery -->
-    <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="{{ asset('fe/js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
 
     <!-- Bootstrap4 files-->
-    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <link href="css/bootstrap-custom.css" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+    <link href="{{ asset('fe/css/bootstrap-custom.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Font awesome 5 -->
-    <link href="fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
+    <link href="{{ asset('fe/fonts/fontawesome/css/fontawesome-all.min.css') }}" type="text/css" rel="stylesheet">
 
     <!-- plugin: fancybox  -->
-    <script src="plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
-    <link href="plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+    <script src="{{ asset('fe/plugins/fancybox/fancybox.min.js') }}" type="text/javascript"></script>
+    <link href="{{ asset('fe/plugins/fancybox/fancybox.min.css') }}" type="text/css" rel="stylesheet">
 
     <!-- plugin: owl carousel  -->
-    <link href="plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
-    <script src="plugins/owlcarousel/owl.carousel.min.js"></script>
+    <link href="{{ asset('fe/plugins/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('fe/plugins/owlcarousel/assets/owl.theme.default.css') }}" rel="stylesheet">
+    <script src="{{ asset('fe/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- custom style -->
-    <link href="css/uikit.css" rel="stylesheet" type="text/css" />
-    <link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+    <link href="{{ asset('fe/css/uikit.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fe/css/responsive.css') }}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
     <!-- custom javascript -->
-    <script src="js/script.js" type="text/javascript"></script>
+    <script src="{{ asset('fe/js/script.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         /// some script
@@ -53,7 +53,7 @@
     <header class="section-header">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="#"><img class="logo" src="images/logos/logo-alibaba.png"
+                <a class="navbar-brand" href="#"><img class="logo" src="{{ asset('fe/images/logos/Picture1.png')}}"
                         alt="alibaba style e-commerce html template file" title="alibaba e-commerce html css theme"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop"
                     aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,10 +90,10 @@
                     </ul> --}}
                     <ul class="mr-auto"></ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a href="#" class="nav-link"> Multi Request </a></li>
-                        <li class="nav-item"><a href="http://bootstrap-ecommerce.com/" class="nav-link"> Download </a>
-                        </li>
-
+                        @guest
+                                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                        @endguest
                     </ul> <!-- navbar-nav.// -->
                 </div> <!-- collapse.// -->
             </div>
@@ -139,36 +139,55 @@
                             <div class="col-auto">
                                 <div class="widget-header dropdown">
                                     <a href="#" data-toggle="dropdown" data-offset="20,10">
-                                        <div class="icontext">
-                                            <div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i>
+                                        @guest
+                                            <div class="icontext">
+                                                <div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i>
+                                                </div>
+
                                             </div>
-                                            <div class="text-wrap text-dark">
-                                                Sign in <br>
-                                                My account <i class="fa fa-caret-down"></i>
-                                            </div>
-                                        </div>
+                                        @endguest
+                                        @auth
+
+									<a href="#" data-toggle="dropdown" data-offset="20,10">
+										<div class="icontext">
+											<div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
+											<div class="text-wrap text-dark">
+												{{Auth::user()->name}} <i class="fa fa-caret-down"></i>
+											</div>
+										</div>
+									</a>
+									<div class="dropdown-menu">
+										<!-- <form class="px-4 py-3">
+											<div class="form-group">
+												<label>Email address</label>
+												<input type="email" class="form-control" placeholder="email@example.com">
+											</div>
+											<div class="form-group">
+												<label>Password</label>
+												<input type="password" class="form-control" placeholder="Password">
+											</div>
+											<button type="submit" class="btn btn-primary">Sign in</button>
+										</form>
+										<hr class="dropdown-divider">
+										<a class="dropdown-item" href="#">Have account? Sign up</a>
+										<a class="dropdown-item" href="#">Forgot password?</a> -->
+											<a class="dropdown-item" href="{{url('/order_detail')}}/{{Auth::user()->id}}">Đơn hàng của tôi</a>
+										<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+														document.getElementById('logout-form').submit();">
+											{{ __('Logout') }}
+										</a>
+
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+											@csrf
+										</form>
+									</div>
+									<!--  dropdown-menu .// -->
+									@endauth
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <form class="px-4 py-3">
-                                            <div class="form-group">
-                                                <label>Email address</label>
-                                                <input type="email" class="form-control"
-                                                    placeholder="email@example.com">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" placeholder="Password">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Sign in</button>
-                                        </form>
-                                        <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="#">Have account? Sign up</a>
-                                        <a class="dropdown-item" href="#">Forgot password?</a>
-                                    </div> <!--  dropdown-menu .// -->
                                 </div> <!-- widget-header .// -->
                             </div> <!-- col.// -->
                             <div class="col-auto">
-                                <a href="#" class="widget-header">
+                                <a href="{{ route('fe.order') }}" class="widget-header">
                                     <div class="icontext">
                                         <div class="icon-wrap"><i
                                                 class="text-warning icon-sm fa fa-shopping-cart"></i></div>

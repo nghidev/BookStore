@@ -19,6 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/home', [App\Http\Controllers\FE\HomeController::class, 'home'])->name('home');
+
 // ======================FE======================
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/', [App\Http\Controllers\FE\HomeController::class, 'index'])->name('fe.index');
+Route::get('fe/detail/{id}', [App\Http\Controllers\FE\HomeController::class, 'detail'])->name('fe.detail');
+Route::get('fe/order', [App\Http\Controllers\FE\HomeController::class, 'order'])->name('fe.order');
+
+
+// ======================BE======================
+Route::get('/be/home', [App\Http\Controllers\BE\AdminController::class, 'index'])->name('BE.index');
