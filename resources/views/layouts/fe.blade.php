@@ -8,7 +8,7 @@
 
     <title>Lazapee</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fe/images/logos/Picture1.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fe/images/logos/Picture1.png') }}">
 
     <!-- jQuery -->
     <script src="{{ asset('fe/js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
@@ -33,6 +33,8 @@
     <link href="{{ asset('fe/css/uikit.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fe/css/responsive.css') }}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
+    @stack('link')
+
     <!-- custom javascript -->
     <script src="{{ asset('fe/js/script.js') }}" type="text/javascript"></script>
 
@@ -46,14 +48,22 @@
         });
         // jquery end
     </script>
-
+    <style> 
+    .avatar_user{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow:5px 5px 15px rgb(231, 216, 216) ;
+    }
+    </style>
 </head>
 
 <body>
     <header class="section-header">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="#"><img class="logo" src="{{ asset('fe/images/logos/Picture1.png')}}"
+                <a class="navbar-brand" href="{{ route('fe.index') }}"><img class="logo"
+                        src="{{ asset('fe/images/logos/Picture1.png') }}"
                         alt="alibaba style e-commerce html template file" title="alibaba e-commerce html css theme"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop"
                     aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,8 +101,8 @@
                     <ul class="mr-auto"></ul>
                     <ul class="navbar-nav">
                         @guest
-                                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @endguest
                     </ul> <!-- navbar-nav.// -->
                 </div> <!-- collapse.// -->
@@ -148,41 +158,53 @@
                                         @endguest
                                         @auth
 
-									<a href="#" data-toggle="dropdown" data-offset="20,10">
-										<div class="icontext">
-											<div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
-											<div class="text-wrap text-dark">
-												{{Auth::user()->name}} <i class="fa fa-caret-down"></i>
-											</div>
-										</div>
-									</a>
-									<div class="dropdown-menu">
-										<!-- <form class="px-4 py-3">
-											<div class="form-group">
-												<label>Email address</label>
-												<input type="email" class="form-control" placeholder="email@example.com">
-											</div>
-											<div class="form-group">
-												<label>Password</label>
-												<input type="password" class="form-control" placeholder="Password">
-											</div>
-											<button type="submit" class="btn btn-primary">Sign in</button>
-										</form>
-										<hr class="dropdown-divider">
-										<a class="dropdown-item" href="#">Have account? Sign up</a>
-										<a class="dropdown-item" href="#">Forgot password?</a> -->
-											<a class="dropdown-item" href="{{url('/order_detail')}}/{{Auth::user()->id}}">Đơn hàng của tôi</a>
-										<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            <a href="#" data-toggle="dropdown" data-offset="20,10">
+                                                <div class="icontext">
+                                                    <div class="icon-wrap"> 
+                                                        @if(Auth::user()->avatar != null)
+                                                        <img class="avatar_user" src="{{ asset(Storage::url('img/product/'.Auth::user()->avatar)) }}">
+                                                        @else  
+                                                        <i class="text-warning icon-sm fa fa-user"></i>
+                                                        @endif
+                                                    </div>
+                                                    <div class="text-wrap text-dark">
+                                                        {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <!-- <form class="px-4 py-3">
+                                            <div class="form-group">
+                                                <label>Email address</label>
+                                                <input type="email" class="form-control" placeholder="email@example.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                            </form>
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item" href="#">Have account? Sign up</a>
+                                            <a class="dropdown-item" href="#">Forgot password?</a> -->
+                                                <a class="dropdown-item" href="{{ route('fe.viewProfile') }}">Thông tin
+                                                    cá nhân</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ url('/order_detail') }}/{{ Auth::user()->id }}">Đơn hàng của
+                                                    tôi</a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
 														document.getElementById('logout-form').submit();">
-											{{ __('Logout') }}
-										</a>
+                                                    {{ __('Logout') }}
+                                                </a>
 
-										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-											@csrf
-										</form>
-									</div>
-									<!--  dropdown-menu .// -->
-									@endauth
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                            <!--  dropdown-menu .// -->
+                                        @endauth
                                     </a>
                                 </div> <!-- widget-header .// -->
                             </div> <!-- col.// -->
@@ -289,7 +311,7 @@
     </footer>
     <!-- ========================= FOOTER END // ========================= -->
 
-
+    @stack('js')
 </body>
 
 </html>

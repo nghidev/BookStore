@@ -27,7 +27,7 @@ class AdminController extends Controller
     {
         $products= Product::all();
         // dd($product);
-        return view('BE.index',['products'=>$products]);
+        return view('Be.product.index');
     }
     
 }
