@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\API\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,4 @@ use App\Http\Controllers\BlogController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('blogs', BlogController::class);
+Route::apiResource('blogs/', BlogController::class);

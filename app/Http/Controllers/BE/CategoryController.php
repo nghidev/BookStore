@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-class BlogController extends Controller
+use App\Models\Category;
+
+use App\Http\Controllers\Controller;
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +17,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return $product;
+        $Cats = Category::all();
+        return view('layouts.fe',['cats'=>$Cats]);
     }
 
     /**

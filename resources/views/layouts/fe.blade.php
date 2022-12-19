@@ -59,6 +59,7 @@
 </head>
 
 <body>
+ 
     <header class="section-header">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
@@ -101,7 +102,7 @@
                     <ul class="mr-auto"></ul>
                     <ul class="navbar-nav">
                         @guest
-                        nghi
+                        
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @endguest
@@ -116,14 +117,14 @@
                     <div class="col-lg-4-24 col-sm-3">
                         <div class="category-wrap dropdown py-1">
                             <button type="button" class="btn btn-light  dropdown-toggle" data-toggle="dropdown"><i
-                                    class="fa fa-bars"></i> Categories</button>
+                                    class="fa fa-bars"></i>Danh mục</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                                <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                                <a class="dropdown-item" href="#">Auto / Transportation</a>
-                                <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                                <a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-                                <a class="dropdown-item" href="#">Beauty & Personal Care / Health </a>
+                                <?php $cats =  App\Models\Cat::orderBy('id', 'DESC')->get(); ?>
+                                @foreach ($cats as $item)
+                                <a class="dropdown-item" href="{{ url('fe/cats')}}/{{ $item->id }}">{{ $item->name }}</a>
+                                    
+                                @endforeach
+                                
                             </div>
                         </div>
                     </div>
@@ -214,6 +215,8 @@
                                     <div class="icontext">
                                         <div class="icon-wrap"><i
                                                 class="text-warning icon-sm fa fa-shopping-cart"></i></div>
+                                                <span class="small round badge badge-secondary">{{ Cart::count() }}</span>
+                                                
                                         <div class="text-wrap text-dark">
                                             Order <br> Protection
                                         </div>
@@ -312,7 +315,7 @@
     </footer>
     <!-- ========================= FOOTER END // ========================= -->
 
-    @stack('js')
 </body>
+@stack('js')
 
 </html>

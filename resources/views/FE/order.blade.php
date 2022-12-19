@@ -1,6 +1,17 @@
 @extends('layouts.fe')
 @section('content')
     <!-- ========================= SECTION CONTENT ========================= -->
+    @foreach (Cart::content() as $item)
+    {{ $item->name }}
+    {{ $item->qty }}
+    {{ "-------" }}
+
+@endforeach
+{{-- @foreach ($get_carts as $item)
+    {{ $item->name }}
+    {{ $item->qty}}
+@endforeach --}}
+    {{-- {{ $total }} --}}
 <section class="section-content bg padding-y border-top">
     <div class="container">
     

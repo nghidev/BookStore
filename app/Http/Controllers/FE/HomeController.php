@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\FE;
 use App\Models\Product;
+use App\Models\Cat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
+use App\Models\Carts;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+
 class HomeController extends Controller
 {
     /**
@@ -33,12 +38,14 @@ class HomeController extends Controller
     public function index()
     {
         $products= Product::all();
+        $Cats = Cat::all();
         // dd($product);
-        return view('FE.index',['products'=>$products]);
+        return view('FE.index',['products'=>$products, 'cats'=>$Cats]);
     }
 
     public function detail($id)
     {
+        
         $product= Product::find($id);
         // dd($product);
         return view('FE.detail',['product'=>$product]);
@@ -46,13 +53,27 @@ class HomeController extends Controller
 
     public function order()
     {
-
+        // $get_carts = Carts::all()->where('user_id',Auth::user()->id);
+        $total = 0;
+        $count = 0;
+        // foreach ( $get_carts as $key => $value) {
+        //     $count += $value->qty;
+        //     $result = $value->price*$value->qty;
+        //     $total += $result;
+        // }
+    //    dd($count);
+        // return view('FE.order',["get_carts"=>$get_carts,"total"=>$total]);
         return view('FE.order');
     }
 
     public function viewProfile()
-    {
+    {   $user = DB::table('users')->find(1);
+        if (Gate::allows('profile-comment', $user)) {
         return view('FE.profile');
+        }
+        else{
+            dd("nguoi dung nay khoong co quyen truy cap");
+        }
     }
 
     public function updateProfile(Request $request)
@@ -96,4 +117,12 @@ class HomeController extends Controller
     
     //     return view('welcome')->with('users', ＄users);
     // }
+    public function getProductByCat($id){
+        $products = Product::where('cats_id',$id)->get();
+        // dd($product);
+        $cats = Cat::all();
+
+
+        return view('FE.index',['products' => $products,'cats'=>$cats]);
+    }
 }

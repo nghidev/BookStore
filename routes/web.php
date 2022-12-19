@@ -1,6 +1,8 @@
 <?php
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FE\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,32 +30,36 @@ Route::get('fe/order', [App\Http\Controllers\FE\HomeController::class, 'order'])
 Route::post('fe/updateProfile', [App\Http\Controllers\FE\HomeController::class, 'updateProfile'])->name('fe.updateProfile');
 //search
 Route::get('fe/test', [App\Http\Controllers\FE\HomeController::class, 'test'])->name('fe.test');
-Route::get('fe/search', function () {
+// Route::get('fe/search', function () {
     
-    // Check for search input
-    if (request('search')) {
-        $product = Product::where('name', 'like', '%' . request('search') . '%')->get();
-    } 
-    else {
-        $product = Product::all();
-    }
-    $check = request('search')== null? 0 : 1;
-    return view('FE.test')->with(['product'=>$product,'check'=>$check]);
-});
-
+//     // Check for search input
+//     if (request('search')) {
+//         $product = Product::where('name', 'like', '%' . request('search') . '%')->get();
+//     } 
+//     else {
+//         $product = Product::all();
+//     }
+//     $check = request('search')== null? 0 : 1;
+//     return view('FE.test')->with(['product'=>$product,'check'=>$check]);
+// });
 // ======================Profile======================
 Route::get('fe/viewProfile', [App\Http\Controllers\FE\HomeController::class, 'viewProfile'])->name('fe.viewProfile');
 Route::post('fe/updateProfile', [App\Http\Controllers\FE\HomeController::class, 'updateProfile'])->name('fe.updateProfile');
 //Thêm ảnh avartar
 Route::post('fe/profile/storeAvatar', [App\Http\Controllers\FE\HomeController::class, 'storeAvatar'])->name('fe.profile.storeAvatar');
-
-
+Route::get('fe/cats/{id}', [App\Http\Controllers\FE\HomeController::class, 'getProductByCat'])->name('fe.cats');
 
 // ======================BE======================
-Route::get('/be/home', [App\Http\Controllers\BE\AdminController::class, 'index'])->name('BE.index');
+Route::get('/be/home', [App\Http\Controllers\BE\ProductController::class, 'index'])->name('BE.index');
 
 // ======================BE PRODUCT======================
-// vào trang chứa form thêm sản phẩm 
 Route::get('/be/product', [App\Http\Controllers\Be\ProductController::class, 'index'])->name('BE.product.index');
-//tiến hành tạo một đội tượng mới Product -> thêm sản phẩm mới 
+Route::get('/be/product/create', [App\Http\Controllers\Be\ProductController::class, 'create'])->name('BE.product.create');
 Route::post('/be/product/store', [App\Http\Controllers\Be\ProductController::class, 'store'])->name('BE.product.store');
+Route::get('/be/product/edit/{id}', [App\Http\Controllers\Be\ProductController::class, 'edit'])->name('BE.product.edit');
+Route::post('/be/product/update', [App\Http\Controllers\Be\ProductController::class, 'update'])->name('BE.product.update');
+Route::get('/be/product/destroy/{id}', [App\Http\Controllers\Be\ProductController::class, 'destroy'])->name('BE.product.destroy');
+
+// ======================SHOPPING CART======================
+Route::get('fe/cart/{id}', [App\Http\Controllers\FE\CartController::class, 'addCart'])->name('Fe.cart');
+
