@@ -4,11 +4,13 @@ namespace App\Http\Controllers\FE;
 
 use App\Models\Product;
 use App\Models\Carts;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Cat;
 
 class CartController extends Controller
 {
@@ -17,6 +19,7 @@ class CartController extends Controller
      *
      * @return void
      */
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,12 +30,16 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // $test = Cat::find(1);
+       
+        return view('FE.cart');
     }
     public function addCart($id)
     {
         $addProduct = Product::find($id);
         $pricre = $addProduct->sale_price != 0 ? $addProduct->sale_price : $addProduct->real_price;
+        
         // $check = DB::table("carts")->where('name', $addProduct->name)->where('user_id',Auth::user()->id)->first();
         // $user = Auth::user()->id;
         // $root = 1;
@@ -54,7 +61,7 @@ class CartController extends Controller
                 'qty' => 1,
                 'weight' => 5,
                 'options' => [
-                    'image' => ''
+                    'image' => $addProduct->feature_image
                 ]
             ]);
             // Cart::instance('wishlist')->store('user');
@@ -111,7 +118,8 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  
+        
     }
 
     /**
@@ -156,6 +164,17 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::remove($id);
+        return redirect()->route('fe.order');
+
     }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+   public function xoa(){
+    Cart::destroy();
+   }
 }

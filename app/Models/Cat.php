@@ -12,4 +12,7 @@ class Cat extends Model
         'id',
         'name',
     ];
+    public function products(){
+        return $this->hasMany(Product::class, 'cats_id');
+    }
 }

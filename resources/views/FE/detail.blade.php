@@ -36,7 +36,7 @@
                                 <article class="gallery-wrap">
                                     <div class="img-big-wrap">
                                         <div> <a href="images/items/1.jpg" data-fancybox=""><img
-                                                    src="images/items/1.jpg"></a></div>
+                                            src="{{ asset(Storage::url('public/img/product/' . $product->feature_image)) }}" ></a></div>
                                     </div> <!-- slider-product.// -->
                                     <div class="img-small-wrap">
                                         <div class="item-gallery"> <img src="images/items/1.jpg"></div>
@@ -53,8 +53,9 @@
 
                                     <div class="mb-3">
                                         <var class="price h3 text-warning">
-                                            <span class="currency">US $</span><span
-                                                class="num">{{ $product->sale_price == 0 ? $product->real_price : $product->sale_price }}</span>
+                                            {{-- <span class="currency">US $</span> --}}
+                                            <span
+                                                class="num">{{ $product->sale_price == 0 ? $product->real_price : $product->sale_price }}đ</span>
                                         </var>
                                         <span>/per kg</span>
                                     </div> <!-- price-detail-wrap .// -->
@@ -68,11 +69,11 @@
                                         <dt class="col-sm-3">Code: </dt>
                                         <dd class="col-sm-9">{{ $product->code }}</dd>
 
-                                        <dt class="col-sm-3">Color</dt>
+                                        {{-- <dt class="col-sm-3">Color</dt>
                                         <dd class="col-sm-9">Black and white </dd>
 
                                         <dt class="col-sm-3">Delivery</dt>
-                                        <dd class="col-sm-9">Russia, USA, and Europe </dd>
+                                        <dd class="col-sm-9">Russia, USA, and Europe </dd> --}}
                                     </dl>
                                     <div class="rating-wrap">
 
@@ -121,7 +122,7 @@
                         <div class="card-body">
                             <h4>Detail overview</h4>
 
-                            <p> {{ $product->detail }}</p>
+                            <p> {!! $product->detail !!}</p>
                         </div> <!-- card-body.// -->
                     </article> <!-- card.// -->
 

@@ -20,4 +20,7 @@ class Product extends Model
         'feature_image', 
         'inventory_number'
     ];
+    public function cat(){
+        return $this->belongsTo(Cat::class);
+    }
 }

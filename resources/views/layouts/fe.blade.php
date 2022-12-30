@@ -55,6 +55,47 @@
         border-radius: 50%;
         box-shadow:5px 5px 15px rgb(231, 216, 216) ;
     }
+    #oklahoma{
+        display: block;
+  	display: -webkit-box;
+  	height: 16px*1.3*3;
+  	font-size: 16px;
+  	line-height: 1.3;
+  	-webkit-line-clamp: 1;  /* số dòng hiển thị */
+  	-webkit-box-orient: vertical;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	margin-top:10px;
+    }
+    @media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+
+.horizontal-timeline .items {
+border-top: 2px solid #ddd;
+}
+
+.horizontal-timeline .items .items-list {
+position: relative;
+margin-right: 0;
+}
+
+.horizontal-timeline .items .items-list:before {
+content: "";
+position: absolute;
+height: 8px;
+width: 8px;
+border-radius: 50%;
+background-color: #ddd;
+top: 0;
+margin-top: -5px;
+}
+
+.horizontal-timeline .items .items-list {
+padding-top: 15px;
+}
     </style>
 </head>
 
@@ -192,7 +233,7 @@
                                                 <a class="dropdown-item" href="{{ route('fe.viewProfile') }}">Thông tin
                                                     cá nhân</a>
                                                 <a class="dropdown-item"
-                                                    href="{{ url('/order_detail') }}/{{ Auth::user()->id }}">Đơn hàng của
+                                                    href="{{ url('fe/orderByUser') }}">Đơn hàng của
                                                     tôi</a>
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
@@ -211,7 +252,7 @@
                                 </div> <!-- widget-header .// -->
                             </div> <!-- col.// -->
                             <div class="col-auto">
-                                <a href="{{ route('fe.order') }}" class="widget-header">
+                                <a href="{{ route('Fe.cart') }}" class="widget-header">
                                     <div class="icontext">
                                         <div class="icon-wrap"><i
                                                 class="text-warning icon-sm fa fa-shopping-cart"></i></div>

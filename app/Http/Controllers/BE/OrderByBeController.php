@@ -1,10 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\BE;
+use App\Models\Product;
+use App\Models\Cat;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
+use App\Models\Carts;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class OrderByBeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +23,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('BE.order.index',['orders'=>$orders]);
     }
 
     /**
@@ -23,7 +34,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +45,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +56,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

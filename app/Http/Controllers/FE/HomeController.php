@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
 use App\Models\Carts;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -63,17 +64,18 @@ class HomeController extends Controller
         // }
     //    dd($count);
         // return view('FE.order',["get_carts"=>$get_carts,"total"=>$total]);
-        return view('FE.order');
+        return view('FE.cart');
     }
 
     public function viewProfile()
-    {   $user = DB::table('users')->find(1);
-        if (Gate::allows('profile-comment', $user)) {
+    {   
+        // $user = DB::table('users')->find(1);
+    //     if (Gate::allows('profile-comment', $user)) {
         return view('FE.profile');
-        }
-        else{
-            dd("nguoi dung nay khoong co quyen truy cap");
-        }
+        // }
+        // else{
+        //     dd("nguoi dung nay khoong co quyen truy cap");
+        // }
     }
 
     public function updateProfile(Request $request)
@@ -124,5 +126,16 @@ class HomeController extends Controller
 
 
         return view('FE.index',['products' => $products,'cats'=>$cats]);
+    }
+    public function viewOrderDetail($id){
+        $order = Order::find($id);
+        $order_detail = DB::table('order_details')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->select('order_details.*', 'orders.*', 'products.name')
+            ->where('orders.id',$id)
+            ->get();
+            // dd($order_detail);
+        return view('FE.orderDetail',['order_detail'=>$order_detail,'order'=>$order]);
     }
 }

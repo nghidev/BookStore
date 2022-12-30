@@ -371,7 +371,7 @@
                             <div class="img-wrap"> <img
                                     src="{{ asset(Storage::url('public/img/product/' . $item->feature_image)) }}"></div>
                             <figcaption class="info-wrap">
-                                <h6 class="title "><a
+                                <h6 class="title" id="oklahoma"><a id="oklahoma"
                                         href="{{ url('fe/detail') }}/{{ $item->id }}">{{ $item->name }}</a></h6>
 
                                 <div class="price-wrap">

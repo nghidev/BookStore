@@ -747,6 +747,13 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('fe/orderByAdmin') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>Quản lý đơn hàng</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
           <span>Tác giả</span>

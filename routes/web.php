@@ -48,9 +48,12 @@ Route::post('fe/updateProfile', [App\Http\Controllers\FE\HomeController::class, 
 //Thêm ảnh avartar
 Route::post('fe/profile/storeAvatar', [App\Http\Controllers\FE\HomeController::class, 'storeAvatar'])->name('fe.profile.storeAvatar');
 Route::get('fe/cats/{id}', [App\Http\Controllers\FE\HomeController::class, 'getProductByCat'])->name('fe.cats');
+Route::get('fe/viewOrderDetail/{id}', [App\Http\Controllers\FE\HomeController::class, 'viewOrderDetail'])->name('fe.cats');
 
 // ======================BE======================
-Route::get('/be/home', [App\Http\Controllers\BE\ProductController::class, 'index'])->name('BE.index');
+Route::get('/be/home', [App\Http\Controllers\BE\ProductController::class, 'index'])->name('BE.index')->middleware('admin');
+Route::get('/be/login', [App\Http\Controllers\BE\AdminController::class, 'login'])->name('BE.login');
+Route::post('/be/submitLogin', [App\Http\Controllers\BE\AdminController::class, 'handleLogin'])->name('BE.subitLogin');
 
 // ======================BE PRODUCT======================
 Route::get('/be/product', [App\Http\Controllers\Be\ProductController::class, 'index'])->name('BE.product.index');
@@ -61,5 +64,18 @@ Route::post('/be/product/update', [App\Http\Controllers\Be\ProductController::cl
 Route::get('/be/product/destroy/{id}', [App\Http\Controllers\Be\ProductController::class, 'destroy'])->name('BE.product.destroy');
 
 // ======================SHOPPING CART======================
-Route::get('fe/cart/{id}', [App\Http\Controllers\FE\CartController::class, 'addCart'])->name('Fe.cart');
+Route::get('fe/cart', [App\Http\Controllers\FE\CartController::class, 'index'])->name('Fe.cart');
+Route::get('fe/cart/{id}', [App\Http\Controllers\FE\CartController::class, 'addCart'])->name('Fe.cart.add');
+Route::get('fe/cart/delete/{id}', [App\Http\Controllers\FE\CartController::class, 'destroy'])->name('Fe.cart.destroy');
+Route::get('fe/cart/xoa', [App\Http\Controllers\FE\CartController::class, 'xoa'])->name('Fe.cart.xoa');
 
+
+// ======================ORDER FOR USER======================
+Route::get('fe/orderByUser', [App\Http\Controllers\FE\OrderByFeController::class, 'index'])->name('Fe.orderByUser');
+Route::get('fe/orderByUser/crete', [App\Http\Controllers\FE\OrderByFeController::class, 'create'])->name('Fe.orderByUser.create');
+Route::post('fe/orderByUser/store', [App\Http\Controllers\FE\OrderByFeController::class, 'store'])->name('Fe.orderByUser.store');
+Route::get('fe/orderByUser/destroy', [App\Http\Controllers\FE\OrderByFeController::class, 'destroy'])->name('Fe.orderByUser.destroy');
+
+
+// ======================ORDER FOR Admin======================
+Route::get('fe/orderByAdmin', [App\Http\Controllers\BE\OrderByBeController::class, 'index'])->name('Fe.orderByAdmin');
