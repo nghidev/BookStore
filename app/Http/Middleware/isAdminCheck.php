@@ -17,14 +17,15 @@ class isAdminCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (Auth::attempt(request(['email', 'password']))) {
+        if (auth()->user() != null) {
            
             if(auth()->user()->role == 1){
                 return $next($request);
             }
-            abort(401, 'Unauthorized.');
-        // }
-        // return redirect()->route('login');
+            abort(401, 'Unauthoriz');
+        }
+        return redirect()->route('BE.login');
     }
+    
 
 }

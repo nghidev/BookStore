@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\BE;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\Cat;
 
 use App\Http\Controllers\Controller;
 
@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $Cats = Category::all();
-        return view('layouts.fe',['cats'=>$Cats]);
+        $Cats = Cat::all();
+        return view('BE.cats.index',['cats'=>$Cats]);
     }
 
     /**
@@ -28,7 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $cats = Cat::all();
+    
+        return view("BE.cats.create",['cats'=>$cats]);
     }
 
     /**
@@ -39,7 +41,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cat = new Cat;
+        $cat->name = $request->cat;
+        $cat->save();
     }
 
     /**
@@ -61,7 +65,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cat = Cat::find($id);
+        return view('BE.cats.edit',['cat'=>$cat]);
     }
 
     /**

@@ -14,24 +14,24 @@
 
 
     <!-- Favicons -->
-    <link href="{{asset('assets/img/favicon.png" rel="icon')}}">
-    <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <link href="{{asset('be/img/favicon.png" rel="icon')}}">
+    <link href="{{asset('be/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset('be/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('be/css/style.css')}}" rel="stylesheet">
     <style>
         body {
             color: #566787;
@@ -330,7 +330,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">Admin</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -345,6 +345,15 @@
 
                   <form action="{{route('BE.subitLogin')}}" method="POST" class="row g-3 needs-validation" novalidate="">
                     @csrf
+                    @if(session()->has('errors'))
+                    <div class="alert alert-danger">
+                       <h6>{{ session()->get('errors') }}</h6>
+                    </div>
+                    @elseif (session()->has('logout'))
+                    <div class="alert alert-success">
+                        <h6>{{ session()->get('logout') }}</h6>
+                     </div>
+                    @endif
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Usernamse</label>
                       <div class="input-group has-validation">
@@ -386,17 +395,17 @@
     </div>
   </main>
 <!-- Vendor JS Files -->
-<script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/vendor/chart.js/chart.min.js')}}"></script>
-<script src="{{asset('assets/vendor/echarts/echarts.min.js')}}"></script>
-<script src="{{asset('assets/vendor/quill/quill.min.js')}}"></script>
-<script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-<script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
-<script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+<script src="{{asset('be/vendor/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{asset('be/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('be/vendor/chart.js/chart.min.js')}}"></script>
+<script src="{{asset('be/vendor/echarts/echarts.min.js')}}"></script>
+<script src="{{asset('be/vendor/quill/quill.min.js')}}"></script>
+<script src="{{asset('be/vendor/simple-datatables/simple-datatables.js')}}"></script>
+<script src="{{asset('be/vendor/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('be/vendor/php-email-form/validate.js')}}"></script>
 
 <!-- Template Main JS File -->
-<script src="{{asset('assets/js/main.js')}}"></script>
+<script src="{{asset('be/js/main.js')}}"></script>
 
 </body>
 

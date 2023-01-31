@@ -53,6 +53,7 @@ Route::get('fe/viewOrderDetail/{id}', [App\Http\Controllers\FE\HomeController::c
 // ======================BE======================
 Route::get('/be/home', [App\Http\Controllers\BE\ProductController::class, 'index'])->name('BE.index')->middleware('admin');
 Route::get('/be/login', [App\Http\Controllers\BE\AdminController::class, 'login'])->name('BE.login');
+Route::get('/be/logout', [App\Http\Controllers\BE\AdminController::class, 'logout'])->name('BE.logout');
 Route::post('/be/submitLogin', [App\Http\Controllers\BE\AdminController::class, 'handleLogin'])->name('BE.subitLogin');
 
 // ======================BE PRODUCT======================
@@ -62,6 +63,15 @@ Route::post('/be/product/store', [App\Http\Controllers\Be\ProductController::cla
 Route::get('/be/product/edit/{id}', [App\Http\Controllers\Be\ProductController::class, 'edit'])->name('BE.product.edit');
 Route::post('/be/product/update', [App\Http\Controllers\Be\ProductController::class, 'update'])->name('BE.product.update');
 Route::get('/be/product/destroy/{id}', [App\Http\Controllers\Be\ProductController::class, 'destroy'])->name('BE.product.destroy');
+
+// ======================BE CATS======================
+Route::get('/be/cats', [App\Http\Controllers\Be\CategoryController::class, 'index'])->name('BE.cats.index');
+Route::get('/be/cats/create', [App\Http\Controllers\Be\CategoryController::class, 'create'])->name('BE.cats.create');
+Route::get('/be/cats/store', [App\Http\Controllers\Be\CategoryController::class, 'store'])->name('BE.cats.store');
+Route::get('/be/cats/edit/{id}', [App\Http\Controllers\Be\CategoryController::class, 'edit'])->name('BE.cats.edit');
+// Route::get('/be/cats/update', [App\Http\Controllers\Be\CategoryController::class, 'index'])->name('BE.cats.index');
+// Route::get('/be/cats/destroy/{id}', [App\Http\Controllers\Be\CategoryController::class, 'index'])->name('BE.cats.index');
+
 
 // ======================SHOPPING CART======================
 Route::get('fe/cart', [App\Http\Controllers\FE\CartController::class, 'index'])->name('Fe.cart');
@@ -78,4 +88,8 @@ Route::get('fe/orderByUser/destroy', [App\Http\Controllers\FE\OrderByFeControlle
 
 
 // ======================ORDER FOR Admin======================
-Route::get('fe/orderByAdmin', [App\Http\Controllers\BE\OrderByBeController::class, 'index'])->name('Fe.orderByAdmin');
+Route::get('be/orderByAdmin', [App\Http\Controllers\BE\OrderByBeController::class, 'index'])->name('Be.orderByAdmin');
+Route::get('be/orderByAdmin/Classification1', [App\Http\Controllers\BE\OrderByBeController::class, 'Classification1'])->name('Be.orderByAdmin.Classification1');
+Route::get('be/orderByAdmin/Classification0', [App\Http\Controllers\BE\OrderByBeController::class, 'Classification0'])->name('Be.orderByAdmin.Classification0');
+Route::get('be/orderByAdmin/Classification2', [App\Http\Controllers\BE\OrderByBeController::class, 'Classification2'])->name('Be.orderByAdmin.Classification2');
+Route::get('be/orderByAdmin/orderDetail/{id}', [App\Http\Controllers\BE\OrderByBeController::class, 'orderDetail'])->name('Be.orderByAdmin.orderDetail');

@@ -32,7 +32,6 @@
                     {{-- <p>{{ $item->total }} đ</p> --}}
                   </div>
                 </div>
-                @endforeach
                 <div class="row">
                   <div class="col-md-8 col-lg-9">
                     <p class="mb-0">Shipping</p>
@@ -45,9 +44,10 @@
   
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                  {{-- <p class="lead fw-bold mb-0" style="color: #f37a27;">{{ $item->total }}đ</p> --}}
+                  <p class="lead fw-bold mb-0" style="color: #f37a27;">{{ $item->total }}đ</p>
                 </div>
               </div>
+              @endforeach
   
               <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Trạng thái</p>
   

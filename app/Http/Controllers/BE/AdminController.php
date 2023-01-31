@@ -40,17 +40,44 @@ class AdminController extends Controller
     {
       
         if (Auth::attempt(request(['email', 'password']))) {
-            if(Auth::user()->name == "nhan"){ 
+            if(Auth::user()->role == 1){ 
                 return redirect()->route('BE.index');
             }
             else{
-            return redirect()->route('BE.login');
+                // $rules = [
+                //     'email' => 'required'|'email',
+                //     'code' => 'unique:products|required|max:10',
+                //     'name' => 'required'
+                // ];
+                
+                // // $messages = [
+                // //     'code.required' => 'Mã sách không được bỏ trống !',
+                // //     'code.max' => 'Trường này chỉ tối đa 6 ký tự',
+                // //     'name.required' => 'Tên sách không được bỏ trống!'
+                // // ];
+        
+                // $request->validate($rules);
+            return redirect()->route('BE.index');
+            // return redirect()->route('BE.login');
             }
-        } else {
-            return redirect()->route('BE.login')
-                ->withInput($request->input())
-                ->withErrors('Tên đăng nhập và mật khẩu không tồn tại');
+        } 
+        else{
+            $request->session()->flash('errors', 'Tên tài khoản hoặc mật khẩu không tồn tại !');
+            return redirect()->route('BE.login');
         }
+        // else {
+        //     return redirect()->route('BE.login')
+        //         ->withInput($request->input())
+        //         ->withErrors('Tên đăng nhập và mật khẩu không tồn tại');
+        // }
      
+    }
+    public function logout (Request $request) {
+        //logout user
+        auth()->logout();
+        $request->session()->flash('logout', 'Đăng xuất thành công !');
+
+        // redirect to homepage
+        return redirect()->route('BE.login');
     }
 }

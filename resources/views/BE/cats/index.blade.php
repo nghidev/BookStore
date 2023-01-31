@@ -5,17 +5,14 @@
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <h2>Quản lý đơn hàng</b></h2>
+                        <div class="col-sm-6">
+                            <h2>Manage <b>Employees</b></h2>
                         </div>
-                        <div class="col-sm-8 ">
-
-                            <a href="{{ route('Be.orderByAdmin.Classification1') }}" class="btn btn-primary"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng đã xác nhận</span></a>
-                            <a href="{{ route('Be.orderByAdmin.Classification0') }}" class="btn btn-danger"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng chưa xác nhận</span></a>
-                            <a href="{{ route('Be.orderByAdmin.Classification2') }}" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng đã giao</span></a>
+                        <div class="col-sm-6">
+                            <a href="{{ route('BE.cats.create') }}" class="btn btn-success" data-toggle="modal"><i
+                                    class="material-icons">&#xE147;</i> <span>Thêm danh mục sản phẩm</span></a>
+                            {{-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
+                                    class="material-icons">&#xE15C;</i> <span>Delete</span></a> --}}
                         </div>
                     </div>
                 </div>
@@ -28,15 +25,14 @@
                                     <label for="selectAll"></label>
                                 </span>
                             </th>
-                            <th>Id</th>
-                            <th>Tên khách hàng</th>
-                            <th>Mã đơn</th>
-                            <th>Chi tiết</th>
-                            <th>Hủy đơn</th>
+                            <th>id</th>
+                            <th>Tên Loại</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $item)
+                        @foreach ($cats as $item)
                             <tr>
                                 <td>
                                     <span class="custom-checkbox">
@@ -45,20 +41,16 @@
                                     </span>
                                 </td>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->consignee_name }}</td>
-
-                                <td>{{ $item->code }}</td>
+                                <td>{{ $item->name }}</td>
+                               
+                                {{-- <td>{{ $item->code }}</td> --}}
                                 {{-- <td>{{ $item->inventory_number }}</td> --}}
                                 {{-- <td>{{ $item->real_price }}</td> --}}
                                 <td>
-                                    {{-- <button type="button" class="btn btn-primary product-gallery" data-product-gallery=""
-                                        data-bs-toggle="modal" data-bs-target="#fullscreenModal">
-                                        BST <span class="badge bg-primary badge-number"></span>
-                                    </button> --}}
-                                    <a href="{{ url('be/orderByAdmin/orderDetail') }}/{{ $item->id }}" class="edit"
+                                    <a href="{{ url('be/cats/edit/') }}/{{ $item->id }}" class="edit"
                                         data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                             title="Edit">&#xE254;</i></a>
-
+                                  
                                 </td>
                                 <td>
                                     <a href="{{ url('be/product/destroy/') }}/{{ $item->id }}" class="delete"
@@ -206,6 +198,6 @@
         </div>
     </div>
     <div class="d-flex container    ">
-        {{-- {{ $products->links('pagination::bootstrap-4') }} --}}
+        {{-- {{ $cats->links('pagination::bootstrap-4') }} --}}
     </div>
 @endsection

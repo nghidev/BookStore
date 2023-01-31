@@ -327,7 +327,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{ route('BE.index') }}" class="logo d-flex align-items-center">
         <img src="be/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -492,19 +492,19 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="be/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            {{-- <img src="be/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{ Auth::user()->name }}</h6>
               <span>Web Designer</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
-
+           
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
@@ -536,7 +536,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('BE.logout') }}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -740,14 +740,14 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link collapsed" href="{{ route('BE.cats.index') }}">
           <i class="bi bi-question-circle"></i>
           <span>Danh mục sản phẩm</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('fe/orderByAdmin') }}">
+        <a class="nav-link collapsed" href="{{ url('be/orderByAdmin') }}">
           <i class="bi bi-question-circle"></i>
           <span>Quản lý đơn hàng</span>
         </a>

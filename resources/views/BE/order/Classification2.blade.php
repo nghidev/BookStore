@@ -6,16 +6,16 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-4">
-                            <h2>Quản lý đơn hàng</b></h2>
+                            <h2>Đơn hàng đã giao</h2>
                         </div>
                         <div class="col-sm-8 ">
 
                             <a href="{{ route('Be.orderByAdmin.Classification1') }}" class="btn btn-primary"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng đã xác nhận</span></a>
-                            <a href="{{ route('Be.orderByAdmin.Classification0') }}" class="btn btn-danger"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng chưa xác nhận</span></a>
-                            <a href="{{ route('Be.orderByAdmin.Classification2') }}" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Đơn hàng đã giao</span></a>
+                                class="material-icons">&#xE147;</i> <span>Đơn hàng đã xác nhận</span></a>
+                       <a href="{{ route('Be.orderByAdmin.Classification0') }}" class="btn btn-danger"><i
+                               class="material-icons">&#xE147;</i> <span>Đơn hàng chưa xác nhận</span></a>
+                       <a href="{{ route('Be.orderByAdmin.Classification2') }}" class="btn btn-success"><i
+                               class="material-icons">&#xE147;</i> <span>Đơn hàng đã giao</span></a>
                         </div>
                     </div>
                 </div>
@@ -37,35 +37,37 @@
                     </thead>
                     <tbody>
                         @foreach ($orders as $item)
-                            <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->consignee_name }}</td>
+                        {{-- @if ($item->id == 1) --}}
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->consignee_name }}</td>
 
-                                <td>{{ $item->code }}</td>
-                                {{-- <td>{{ $item->inventory_number }}</td> --}}
-                                {{-- <td>{{ $item->real_price }}</td> --}}
-                                <td>
-                                    {{-- <button type="button" class="btn btn-primary product-gallery" data-product-gallery=""
-                                        data-bs-toggle="modal" data-bs-target="#fullscreenModal">
-                                        BST <span class="badge bg-primary badge-number"></span>
-                                    </button> --}}
-                                    <a href="{{ url('be/orderByAdmin/orderDetail') }}/{{ $item->id }}" class="edit"
-                                        data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
-                                            title="Edit">&#xE254;</i></a>
+                            <td>{{ $item->code }}</td>
+                            {{-- <td>{{ $item->inventory_number }}</td> --}}
+                            {{-- <td>{{ $item->real_price }}</td> --}}
+                            <td>
+                                {{-- <button type="button" class="btn btn-primary product-gallery" data-product-gallery=""
+                                    data-bs-toggle="modal" data-bs-target="#fullscreenModal">
+                                    BST <span class="badge bg-primary badge-number"></span>
+                                </button> --}}
+                                <a href="{{ url('be/product/edit/') }}/{{ $item->id }}" class="edit"
+                                    data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                                        title="Edit">&#xE254;</i></a>
 
-                                </td>
-                                <td>
-                                    <a href="{{ url('be/product/destroy/') }}/{{ $item->id }}" class="delete"
-                                        data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
-                                            title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
+                            </td>
+                            <td>
+                                <a href="{{ url('be/product/destroy/') }}/{{ $item->id }}" class="delete"
+                                    data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                                        title="Delete">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                        {{-- @endif --}}
                         @endforeach
                         {{-- <div class="container bg-success" id="check_submit" style="width:300px;height:200px;position: absolute; top:200px; z-index:1; display:none;" >
                             <h3 class="text-light">bạn có muốn xóa</h3>

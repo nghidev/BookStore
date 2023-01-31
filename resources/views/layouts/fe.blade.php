@@ -144,8 +144,8 @@ padding-top: 15px;
                     <ul class="navbar-nav">
                         @guest
                         
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">Đăng nhập</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">Đăng ký</a></li>
                         @endguest
                     </ul> <!-- navbar-nav.// -->
                 </div> <!-- collapse.// -->
@@ -259,7 +259,7 @@ padding-top: 15px;
                                                 <span class="small round badge badge-secondary">{{ Cart::count() }}</span>
                                                 
                                         <div class="text-wrap text-dark">
-                                            Order <br> Protection
+                                            Giỏ  <br> hàng
                                         </div>
                                     </div>
                                 </a>
@@ -270,7 +270,7 @@ padding-top: 15px;
                                         <div class="icon-wrap"><i class="text-warning icon-sm  fa fa-heart"></i></div>
                                         <div class="text-wrap text-dark">
                                             <span class="small round badge badge-secondary">0</span>
-                                            <div>Favorites</div>
+                                            <div>Yêu thích</div>
                                         </div>
                                     </div>
                                 </a>
